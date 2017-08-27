@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../styles/App.css';
 
-import "../styles/App.css";
+
 import Jumbotron from "./Jumbotron";
 import Form from "./Form";
 import Vehicles from "./Vehicles";
@@ -34,11 +34,12 @@ handleSubmit(event){
     }
 
     componentDidMount() {
-console.log("did mount");
+console.log("vehicles api working here");
       fetch('https://swapi.co/api/vehicles/')
       .then(response => response.json() )
       .then((json) => {
         console.log("Data from componentDidMount fetch", json)
+//setting the fetched json to setState to hold the data to be used later
         this.setState({
           vehicles: json.results})
       })
@@ -49,9 +50,11 @@ console.log("did mount");
   return (
         <div className="App">
           <Jumbotron/>
+          {/* there are 3 things to be concerend or (*handle*) with when rendering in Form file*/}
           <Form handleSubmit={this.handleSubmit}
                 handleNameChange={this.handleNameChange}
                 pilot={this.state.pilot}/>
+          {/*there is one thing to be concerend or (*this.state.vehicles*) with when rendering in vehicles*/}
           <Vehicles vehicles={this.state.vehicles}/>
         </div>
          );
